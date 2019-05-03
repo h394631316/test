@@ -7,17 +7,19 @@ import Fly from 'flyio/dist/npm/fly'
 import Fly from 'flyio/dist/npm/wx'
 // #endif
 
+import storagekeyConsts from 'common/storageKeyConsts.js'
+import util from 'common/util.js'
 
 const request = new Fly()
 
 //定义公共headers
-request.config.headers={xx:5,bb:6,dd:7}
+//request.config.headers={xx:5,bb:6,dd:7}
 //设置超时
-request.config.timeout=1000*30
+request.config.timeout = 1000 * 30
 //跨域时是否发送cookie
-request.config.withCredentials=false
+request.config.withCredentials = false
 //设置请求基地址
-request.config.baseURL="http://122.114.159.28:8002/api/"
+request.config.baseURL = "http://122.114.159.28:8002/api/"
 
 const errorPrompt = (err) => {
 	// #ifdef MP-WEIXIN
@@ -34,11 +36,17 @@ const errorPrompt = (err) => {
 	// #endif
 }
 
-request.interceptors.request.use((request) => {
+request.interceptors.request.use( (request) => {
 	// // wx.showNavigationBarLoading()
 	uni.showLoading({
 		title: ''
 	});
+
+	request.headers = { //设置请求头
+		"content-type": "application/json",
+		"Abp.TenantId": uni.getStorageSync(storagekeyConsts.tenantId),
+	}
+
 	return request
 })
 

@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/ucenter/login",
+    "pages/ucenter/register",
+    "pages/ucenter/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uniapp-demo",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "bounce": "none"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#f38031",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/ucenter/login",
+        "iconPath": "static/img/footer/footer-home.png",
+        "selectedIconPath": "static/img/footer/footer-home-act.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/ucenter/register",
+        "iconPath": "static/img/footer/footer-task.png",
+        "selectedIconPath": "static/img/footer/footer-task-act.png",
+        "text": "注册"
+      }
+    ]
+  },
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "uniapp-demo",
+  "compilerVersion": "1.9.3",
+  "usingComponents": {}
+}

@@ -13,7 +13,7 @@ const authenticate = async function(input) {
 
 	//const data = await request.post(url,input);
 	let [err, data] = await to(request.post(url,input));
-		debugger
+		
 	if (err&&err.response&&err.response.data){
 		data = err.response.data;
 	}

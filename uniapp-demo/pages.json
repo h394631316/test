@@ -17,6 +17,12 @@
 					"bounce":"none"
 				}
 			}
+		},
+		{
+			"path": "pages/ucenter/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
 		}
 	],
 	"globalStyle": {

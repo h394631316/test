@@ -8,10 +8,13 @@
 		<view class="content">
 			<view class="has-mglr-10">
 				<view class="has-mgtb-10">
+					<input type="text" v-model="login.tenant" placeholder="请输入租户" class="is-input1" data-val="tenant" />
+				</view>
+				<view class="has-mgtb-10">
 					<input type="number" maxlength="11" v-model="login.phone" placeholder="请输入手机号" class="is-input1" @input="bindInput" data-val="phone" />
 				</view>
 				<view class="has-radius has-mgtb-10">
-					<input v-model="login.password" placeholder="请输入登录密码" class="is-input1" @input="bindInput" data-val="password" />
+					<input password="true" v-model="login.password" placeholder="请输入登录密码" class="is-input1" @input="bindInput" data-val="password" />
 				</view>
 				
 				<view class="loginbtn has-radius has-mgtb-20">
@@ -36,6 +39,7 @@
 			return {
 				login:{
 					loading:false,
+					tenant:'',
 					phone:'',
 					password:''
 				},
@@ -45,23 +49,30 @@
 			defaultHandlerLogin: async function () {
 				
 				const input = {
-					tenancyName: 'ccsoft',
+					tenancyName: this.login.tenant,
 					};
 					this.login.loading = true;
 				const tenantVailableResponse = await account.isTenantAvailable(input);
 
 				if (tenantVailableResponse.success) {
 					const authenticateInput = {
-						userNameOrEmailAddress:'hjw',
-						password:'111111'
+						userNameOrEmailAddress:this.login.phone,
+						password:this.login.password
 					};
 					const authenticateResponse = await tokenAuth.authenticate(authenticateInput);
-					debugger
+		
 					if(authenticateResponse.success){
-						const token=authenticateResponse.accessToken;
-						const userId = authenticateResponse.userId;
+						const token=authenticateResponse.result.accessToken;
+						const userId = authenticateResponse.result.userId;
+						uni.reLaunch({
+						    url: '/pages/ucenter/index',
+						});
 					}else{
 						const errorMessage = authenticateResponse.error.details;
+						uni.showToast({
+							icon: 'none',
+							title: errorMessage
+						});
 					}
 				}
 				this.login.loading = false;
